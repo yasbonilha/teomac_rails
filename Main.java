@@ -11,73 +11,83 @@ public class Main {
         //entrada de numero de vagoes
         Scanner scanner = new Scanner(System.in);
         int numeroVagoes = scanner.nextInt();
+
+        while (numeroVagoes != 0) {
+
+            boolean ordens = true;
+
+            while (ordens == true) {
+                List<Integer> listaNumeros = new ArrayList<>();
+            
+                for (int i = 0; i < numeroVagoes; i++) {
+                    int n  = scanner.nextInt();
+                    if (n == 0 ) {
+                        i = numeroVagoes - 1;
+                        ordens = false;
+                    }
+                    else{
+                    listaNumeros.add(n);
+                    }
+                }
+                    
+                if (ordens == true) {
+
+                    //pilha A
+                    for (int i = numeroVagoes; i>=1; i--){
+                        a.push(i);
+                    }
+            
+                    int cont = 0;
+                    //logica de esvaziar a pilha A
+                    for(int i = 0; i< numeroVagoes; i++){
+                        int temp;
+                        if( listaNumeros.get(cont) == a.peek()) {
+                            temp = a.pop();
+                            estacao.push(temp);
+                            estacao.pop();
+                            b.push(temp);
+                            cont++;
+                        }
+                        else if(!estacao.estaVazio() && listaNumeros.get(cont) == estacao.peek()){
+                            temp = estacao.pop();
+                            b.push(temp);
+                            cont++;
+                        }
+                        else{
+                            temp = a.pop();
+                            estacao.push(temp);
+                        }
+                    }
+            
+                    //logica de ver se a ordem é possível
+                    boolean possivel = true;
+                    while(cont <= listaNumeros.size() && possivel){
+                        int temp;
+                        if(listaNumeros.get(cont) == estacao.peek()){
+                            temp = estacao.pop();
+                            b.push(temp);
+                            cont++;
+                        }
+                        else{
+                            possivel = false;
+                        }
+                    }
+            
+                    if (possivel){
+                        System.out.println("Yes");
+                    }
+                    else{
+                        System.out.println("No");
+                    }
+
+
+                }
+                
+            }
+            
+            numeroVagoes = scanner.nextInt();
+        }
         
-        //ordens que ele quer;
-        // int[] resultConvertido = {2, 4, 6, 1, 5, 3};
-
-
-        //pegar a ordem que o usuario quer e converter em uma lista de inteiros
-        List<Integer> listaNumeros = new ArrayList<>();
-        scanner.next();
-        String entrada = scanner.nextLine();
-
-        String[] partes = entrada.split("\\s+");
-
-        for (String parte : partes) {
-            try {
-                int numero = Integer.parseInt(parte);
-                listaNumeros.add(numero);
-            } catch (NumberFormatException e) {
-                System.out.println("Ignorando entrada inválida: " + parte);
-            }
-        }
-
-        for (int numero : listaNumeros) {
-            System.out.println(numero);
-        }
-
-        //pilha A
-        for (int i = numeroVagoes; i>=1; i--){
-            a.push(i);
-        }
-
-        int cont = 0;
-        //logica de esvaziar a pilha A
-        for(int i = 0; i< numeroVagoes; i++){
-            int temp;
-            if( listaNumeros.get(cont) == a.peek()) {
-                temp = a.pop();
-                estacao.push(temp);
-                estacao.pop();
-                b.push(temp);
-                cont++;
-            }
-            else{
-                temp = a.pop();
-                estacao.push(temp);
-            }
-        }
-
-        //logica de ver se a ordem é possível
-        boolean possivel = true;
-        while(cont < listaNumeros.size() && possivel){
-            int temp;
-            if(listaNumeros.get(cont) == estacao.peek()){
-                temp = estacao.pop();
-                b.push(temp);
-                cont++;
-            }
-            else{
-                possivel = false;
-            }
-        }
-
-        if (possivel){
-            System.out.println("Yes");
-        }
-        else{
-            System.out.println("No");
-        }
 
         scanner.close();
     }

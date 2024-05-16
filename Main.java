@@ -8,7 +8,7 @@ public class Main {
         Pilha estacao = new Pilha();
         Pilha b = new Pilha();
 
-        //entrada de numero de vagoes
+        //entrada de numero de vagoes que o usuario quer
         Scanner scanner = new Scanner(System.in);
         int numeroVagoes = scanner.nextInt();
 
@@ -24,7 +24,7 @@ public class Main {
                     if (n == 0 ) {
                         i = numeroVagoes - 1;
                         ordens = false;
-                    }
+                    } //se o usuario digitar 0, volta para o numero de vagoes
                     else{
                     listaNumeros.add(n);
                     }
@@ -60,7 +60,7 @@ public class Main {
                         }
                     }
             
-                    //logica de ver se a ordem é possível
+                    //logica de ver se a ordem é possível com os outros que estao na estacao
                     boolean possivel = true;
                     while(cont < listaNumeros.size() && possivel){
                         int temp;
@@ -95,6 +95,8 @@ public class Main {
 
 }
 
+
+//classes feitas em aula
  class No{
     private int info;
     private No proximo;

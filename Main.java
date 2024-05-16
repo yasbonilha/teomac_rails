@@ -46,12 +46,13 @@ public class Main {
                             estacao.push(temp);
                             estacao.pop();
                             b.push(temp);
-                            cont++;
+                            if (cont < numeroVagoes )cont++;
                         }
                         else if(!estacao.estaVazio() && listaNumeros.get(cont) == estacao.peek()){
                             temp = estacao.pop();
                             b.push(temp);
-                            cont++;
+                            if (cont < numeroVagoes) cont++;
+                            i--;
                         }
                         else{
                             temp = a.pop();
@@ -61,7 +62,7 @@ public class Main {
             
                     //logica de ver se a ordem é possível
                     boolean possivel = true;
-                    while(cont <= listaNumeros.size() && possivel){
+                    while(cont < listaNumeros.size() && possivel){
                         int temp;
                         if(listaNumeros.get(cont) == estacao.peek()){
                             temp = estacao.pop();
